@@ -430,14 +430,12 @@ export default function App() {
             Request a Quote
           </h2>
           <div className="max-w-2xl mx-auto">
-            <form
-              action="https://formspree.io/f/mvzvzvwa"
-              method="POST"
-              onSubmit={(e) => {
-                // optional but safe
-              }}
-              className="bg-white rounded-xl shadow-lg p-8 space-y-4"
-            >
+            <form action="https://formspree.io/f/mvzvzvwa" method="POST">
+              <input
+                type="hidden"
+                name="_next"
+                value="https://your-site.vercel.app/success"
+              />
               <div>
                 <label className="block text-gray-700 font-medium mb-2">
                   Name *
