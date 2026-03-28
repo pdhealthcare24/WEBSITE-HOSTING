@@ -430,80 +430,60 @@ export default function App() {
             Request a Quote
           </h2>
           <div className="max-w-2xl mx-auto">
-            <form action="https://formspree.io/f/mvzvzvwa" method="POST">
-              <input
-                type="hidden"
-                name="_next"
-                value="https://your-site.vercel.app/success"
-              />
+             <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+
+                const formData = new FormData(e.currentTarget);
+
+                try {
+                  const res = await fetch("https://formspree.io/f/mvzvzvwa", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                      Accept: "application/json",
+                    },
+                  });
+
+                  if (res.ok) {
+                    alert("✅ Form submitted successfully!");
+                    e.currentTarget.reset();
+                  } else {
+                    alert("❌ Submission failed");
+                  }
+                } catch {
+                  alert("❌ Error submitting form");
+                }
+              }}
+              className="bg-white rounded-xl shadow-lg p-8 space-y-4"
+            >
+
               <div>
-                <label className="block text-gray-700 font-medium mb-2">
-                  Name *
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  placeholder="Your full name"
-                />
+                <label className="block text-gray-700 font-medium mb-2">Name *</label>
+                <input type="text" name="name" required className="w-full px-4 py-3 border rounded-lg" />
               </div>
 
               <div>
-                <label className="block text-gray-700 font-medium mb-2">
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  placeholder="your.email@company.com"
-                />
+                <label className="block text-gray-700 font-medium mb-2">Email *</label>
+                <input type="email" name="email" required className="w-full px-4 py-3 border rounded-lg" />
               </div>
 
               <div>
-                <label className="block text-gray-700 font-medium mb-2">
-                  Phone *
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  placeholder="+1 (555) 123-4567"
-                />
+                <label className="block text-gray-700 font-medium mb-2">Phone *</label>
+                <input type="tel" name="phone" required className="w-full px-4 py-3 border rounded-lg" />
               </div>
 
               <div>
-                <label className="block text-gray-700 font-medium mb-2">
-                  Company / Hospital
-                </label>
-                <input
-                  type="text"
-                  name="company"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  placeholder="Your organization name"
-                />
+                <label className="block text-gray-700 font-medium mb-2">Company</label>
+                <input type="text" name="company" className="w-full px-4 py-3 border rounded-lg" />
               </div>
 
               <div>
-                <label className="block text-gray-700 font-medium mb-2">
-                  Message *
-                </label>
-                <textarea
-                  name="message"
-                  required
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500"
-                  placeholder="Tell us about your requirements..."
-                />
+                <label className="block text-gray-700 font-medium mb-2">Message *</label>
+                <textarea name="message" required rows={4} className="w-full px-4 py-3 border rounded-lg" />
               </div>
 
-              <button
-                type="submit"
-                className="w-full bg-teal-600 text-white py-3 rounded-lg font-semibold hover:bg-teal-700 transition"
-              >
+              <button className="w-full bg-teal-600 text-white py-3 rounded-lg hover:bg-teal-700">
                 Submit Request
               </button>
             </form>
