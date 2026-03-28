@@ -431,7 +431,7 @@ export default function App() {
           </h2>
           <div className="max-w-2xl mx-auto">
             <form
-              action={formspreeUrl}
+              action="https://formspree.io/f/mvzvzvwa"
               method="POST"
               className="bg-white rounded-xl shadow-lg p-8 space-y-4"
             >
