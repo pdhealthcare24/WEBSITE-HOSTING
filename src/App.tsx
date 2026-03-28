@@ -433,6 +433,9 @@ export default function App() {
             <form
               action="https://formspree.io/f/mvzvzvwa"
               method="POST"
+              onSubmit={(e) => {
+                // optional but safe
+              }}
               className="bg-white rounded-xl shadow-lg p-8 space-y-4"
             >
               <div>
