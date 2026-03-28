@@ -431,33 +431,38 @@ export default function App() {
           </h2>
           <div className="max-w-2xl mx-auto">
              <form
-              onSubmit={async (e) => {
-                e.preventDefault();
+  onSubmit={async (e) => {
+    e.preventDefault();
 
-                const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
-                try {
-                  const res = await fetch("https://formspree.io/f/mvzvzvwa", {
-                    method: "POST",
-                    body: formData,
-                    headers: {
-                      Accept: "application/json",
-                    },
-                  });
+    try {
+      const response = await fetch("https://formspree.io/f/mvzvzvwa", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
 
-                  if (res.ok) {
-                    alert("✅ Form submitted successfully!");
-                    e.currentTarget.reset();
-                  } else {
-                    alert("❌ Submission failed");
-                  }
-                } catch {
-                  alert("❌ Error submitting form");
-                }
-              }}
-              className="bg-white rounded-xl shadow-lg p-8 space-y-4"
-            >
+      const data = await response.json().catch(() => null);
 
+      // ✅ FIX: handle Formspree correctly
+      if (response.status === 200 || response.status === 202) {
+        alert("✅ Form submitted successfully!");
+        form.reset();
+      } else {
+        console.error("Formspree error:", data);
+        alert("❌ Error submitting form");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("❌ Network error");
+    }
+  }}
+  className="bg-white rounded-xl shadow-lg p-8 space-y-4"
+>
               <div>
                 <label className="block text-gray-700 font-medium mb-2">Name *</label>
                 <input type="text" name="name" required className="w-full px-4 py-3 border rounded-lg" />
