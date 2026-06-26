@@ -19,6 +19,8 @@ import {
 export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [selectedImage, setSelectedImage] = useState(0);
   const [stats, setStats] = useState({
     Healthcare_Partners: 0,
     Orders_Delivered: 0,
@@ -32,13 +34,13 @@ export default function App() {
       name: "PRONEXIS Powder",
       price: "530 / Jar",
       category: "Powders",
-       images:[
-      "/products/pronexis/front.png",
-      "/products/pronexis/back.png",
-      "/products/pronexis/side.png",
-      "/products/pronexis/nutrition.png",
-      "/products/pronexis/lifestyle.png",
-       ],
+      images: [
+        "/products/pronexis/1.png",
+        "/products/pronexis/2.png",
+        "/products/pronexis/3.png",
+        "/products/pronexis/4.png",
+        "/products/pronexis/5.png",
+      ],
       description:
         "Premium Whey Protein (200 g)\n ✓ 36% High-Quality Protein\n✓ Vitamins & Minerals\n✓ Muscle Recovery Support\n✓ Easy to Digest\n✓ Vanilla Flavour\n ",
     },
@@ -47,6 +49,13 @@ export default function App() {
       name: "PDFLEX Tablets",
       price: " 349 / Strip",
       category: "Tablets",
+      images: [
+        "/products/pdflex/1.png",
+        "/products/pdflex/2.png",
+        "/products/pdflex/3.png",
+        "/products/pdflex/4.png",
+        "/products/pdflex/5.png",
+      ],
       description:
         "Advanced Joint Care Formula\n✓ Supports joint flexibility\n✓ Helps maintain healthy cartilage\n✓ Promotes mobility & comfort\n✓ Glucosamine 200 mg • Collagen Type II 40 mg\n✓ Rose Hip 275 mg • Boswellia 307.5 mg",
     },
@@ -55,6 +64,13 @@ export default function App() {
       name: "PDLIV DS Syrup",
       price: " 160 / Bottle",
       category: "Syrups",
+      images: [
+        "/products/pdliv/1.png",
+        "/products/pdliv/2.png",
+        "/products/pdliv/3.png",
+        "/products/pdliv/4.png",
+        "/products/pdliv/5.png",
+      ],
       description:
         "PDLIV DS - Liver Support Syrup\n✓ Fatty Liver\n✓ Digestive Disorders\n✓ Liver Cirrhosis\n✓ Supports Liver Detoxification\n✓ Tricholine Citrate, Sorbitol & Phyllanthus Extract",
     },
@@ -63,6 +79,13 @@ export default function App() {
       name: "Prezyme Syrup",
       price: " 129 / Bottle",
       category: "Syrups",
+      images: [
+        "/products/prezyme/1.png",
+        "/products/prezyme/2.png",
+        "/products/prezyme/3.png",
+        "/products/prezyme/4.png",
+        "/products/prezyme/5.png",
+      ],
       description:
         "PREZYME - Fungal Diastase & Pepsin\n✓ Loss of Appetite\n✓ Dyspepsia (Indigestion)\n✓ Obstinate Vomiting\n✓ Digestive Upset",
     },
@@ -71,6 +94,13 @@ export default function App() {
       name: "PDCURE DS Capsules",
       price: " 449 / Bottle",
       category: "Capsules",
+      images: [
+        "/products/pdcure/1.png",
+        "/products/pdcure/2.png",
+        "/products/pdcure/3.png",
+        "/products/pdcure/4.png",
+        "/products/pdcure/5.png",
+      ],
       description:
         "Supports faster recovery.\n✓ Wound healing\n✓ Reduces pain & inflammation\n✓ Post-surgical care\n✓ Trypsin, Bromelain & Rutoside",
     },
@@ -365,7 +395,19 @@ export default function App() {
                 key={product.id}
                 className="bg-white rounded-xl shadow-md hover:shadow-xl transition p-6"
               >
-                <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-32 mb-4" />
+                <div
+                  className="w-full h-48 mb-4 rounded-xl overflow-hidden bg-gray-50 cursor-pointer"
+                  onClick={() => {
+                    setSelectedProduct(product);
+                    setSelectedImage(0);
+                  }}
+                >
+                  <img
+                    src={product.images[0]}
+                    alt={product.name}
+                    className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="text-lg font-semibold text-gray-900">
                     {product.name}
@@ -693,7 +735,6 @@ export default function App() {
                 Delivering trusted pharmaceutical formulations with a commitment
                 to quality, innovation, and patient well-being.
               </p>
-
             </div>
 
             {/* ================= QUICK LINKS ================= */}
@@ -742,8 +783,6 @@ export default function App() {
               <h3 className="text-xl font-semibold mb-6">Contact</h3>
 
               <div className="space-y-5">
-             
-
                 <a
                   href="tel:+917011351992"
                   className="flex items-center gap-3 text-slate-400 hover:text-teal-400 transition"
@@ -842,6 +881,100 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {/* ================= PRODUCT MODAL ================= */}
+
+      {selectedProduct && (
+        <div
+          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+          onClick={() => setSelectedProduct(null)}
+        >
+          <div
+            className="bg-white rounded-3xl shadow-2xl max-w-5xl w-[92%] p-8 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedProduct(null)}
+              className="absolute top-4 right-4 text-3xl font-bold text-gray-500 hover:text-red-500"
+            >
+              ×
+            </button>
+            <div className="grid md:grid-cols-2 gap-10 items-start">
+              {/* LEFT SIDE - IMAGE */}
+
+              <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+                <div className="relative">
+                  {/* Previous Button */}
+                  <button
+                    onClick={() =>
+                      setSelectedImage((prev) =>
+                        prev === 0
+                          ? selectedProduct.images.length - 1
+                          : prev - 1,
+                      )
+                    }
+                    className="absolute left-3 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full w-9 h-9 flex items-center justify-center hover:scale-110 transition"
+                  >
+                    ‹
+                  </button>
+
+                  {/* Image */}
+                  <img
+                    src={selectedProduct.images[selectedImage]}
+                    alt={selectedProduct.name}
+                    className="w-full h-96 object-contain transition-all duration-300"
+                  />
+
+                  {/* Next Button */}
+                  <button
+                    onClick={() =>
+                      setSelectedImage((prev) =>
+                        prev === selectedProduct.images.length - 1
+                          ? 0
+                          : prev + 1,
+                      )
+                    }
+                    className="absolute right-3 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full w-9 h-9 flex items-center justify-center hover:scale-110 transition"
+                  >
+                    ›
+                  </button>
+                </div>
+              </div>
+
+              {/* RIGHT SIDE - DETAILS */}
+
+              <div>
+                <h2 className="text-4xl font-extrabold tracking-tight text-gray-900">
+                  {selectedProduct.name}
+                </h2>
+
+                <p className="text-4xl font-bold text-teal-600 mt-4">
+                  ₹ {selectedProduct.price}
+                </p>
+
+                <span className="inline-block mt-4 bg-teal-100 text-teal-700 px-4 py-2 rounded-full">
+                  {selectedProduct.category}
+                </span>
+
+                <p className="mt-6 whitespace-pre-line text-gray-700 leading-8">
+                  {selectedProduct.description}
+                </p>
+
+                <button
+                  onClick={() => {
+                    setSelectedProduct(null);
+                    scrollToSection("contact");
+                  }}
+                  className="mt-8 w-full bg-teal-600 hover:bg-teal-700 hover:scale-[1.02] text-white py-3 rounded-xl transition-all duration-300 font-semibold shadow-md"
+                >
+                  Enquire Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
