@@ -1,74 +1,94 @@
 import { useState, useEffect } from "react";
 import {
   ArrowRight,
-  Clock,
-  MapPin,
-  Phone,
-  Mail,
   Users,
   Award,
   Shield,
   Package,
-  Check,
   Star,
+  Phone,
+  Mail,
+  Clock,
+  MapPin,
+  ChevronRight,
+  // Facebook,
+  // Instagram,
+  // Linkedin,
 } from "lucide-react";
 
 export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [stats, setStats] = useState({
-    products: 0,
-    categories: 0,
-    clients: 0,
-    years: 0,
+    Healthcare_Partners: 0,
+    Orders_Delivered: 0,
+    Product_Categories: 0,
+    Customer_Satisfaction: 0,
   });
 
   const products = [
     {
       id: 1,
-      name: "Amoxicillin 500mg",
-      category: "Tablets",
-      description: "Broad-spectrum antibiotic for bacterial infections",
+      name: "PRONEXIS Powder",
+      price: "530 / Jar",
+      category: "Powders",
+       images:[
+      "/products/pronexis/front.png",
+      "/products/pronexis/back.png",
+      "/products/pronexis/side.png",
+      "/products/pronexis/nutrition.png",
+      "/products/pronexis/lifestyle.png",
+       ],
+      description:
+        "Premium Whey Protein (200 g)\n ✓ 36% High-Quality Protein\n✓ Vitamins & Minerals\n✓ Muscle Recovery Support\n✓ Easy to Digest\n✓ Vanilla Flavour\n ",
     },
     {
       id: 2,
-      name: "Paracetamol 650mg",
+      name: "PDFLEX Tablets",
+      price: " 349 / Strip",
       category: "Tablets",
-      description: "Effective pain reliever and fever reducer",
+      description:
+        "Advanced Joint Care Formula\n✓ Supports joint flexibility\n✓ Helps maintain healthy cartilage\n✓ Promotes mobility & comfort\n✓ Glucosamine 200 mg • Collagen Type II 40 mg\n✓ Rose Hip 275 mg • Boswellia 307.5 mg",
     },
     {
       id: 3,
-      name: "Omeprazole 20mg",
-      category: "Capsules",
-      description: "Proton pump inhibitor for acid reflux",
+      name: "PDLIV DS Syrup",
+      price: " 160 / Bottle",
+      category: "Syrups",
+      description:
+        "PDLIV DS - Liver Support Syrup\n✓ Fatty Liver\n✓ Digestive Disorders\n✓ Liver Cirrhosis\n✓ Supports Liver Detoxification\n✓ Tricholine Citrate, Sorbitol & Phyllanthus Extract",
     },
     {
       id: 4,
-      name: "Cough Syrup",
+      name: "Prezyme Syrup",
+      price: " 129 / Bottle",
       category: "Syrups",
-      description: "Relieves cough and throat irritation",
+      description:
+        "PREZYME - Fungal Diastase & Pepsin\n✓ Loss of Appetite\n✓ Dyspepsia (Indigestion)\n✓ Obstinate Vomiting\n✓ Digestive Upset",
     },
     {
       id: 5,
-      name: "Vitamin D3",
+      name: "PDCURE DS Capsules",
+      price: " 449 / Bottle",
       category: "Capsules",
-      description: "Essential vitamin supplement",
+      description:
+        "Supports faster recovery.\n✓ Wound healing\n✓ Reduces pain & inflammation\n✓ Post-surgical care\n✓ Trypsin, Bromelain & Rutoside",
     },
-    {
-      id: 6,
-      name: "Antiseptic Cream",
-      category: "Creams",
-      description: "Topical antiseptic for wound care",
-    },
+    //   {
+    //     id: 6,
+    //     name: "Antiseptic Cream",
+    //     category: "Creams",
+    //     description: "Topical antiseptic for wound care",
+    //   },
   ];
 
   useEffect(() => {
     const animateStats = () => {
       const targets = {
-        products: 5,
-        categories: 5,
-        clients: 500,
-        years: 2,
+        Healthcare_Partners: 500,
+        Orders_Delivered: 1000,
+        Product_Categories: 5,
+        Customer_Satisfaction: 99,
       };
       Object.entries(targets).forEach(([key, target]) => {
         let current = 0;
@@ -93,6 +113,7 @@ export default function App() {
     "Syrups",
     "Creams",
     "Injectables",
+    "Powders",
   ];
   const filteredProducts =
     selectedCategory === "All"
@@ -105,7 +126,7 @@ export default function App() {
   };
 
   // Note: Replace 'YOUR_FORMSPREE_ID' with your actual Formspree form ID
-  const formspreeId = "https://formspree.io/f/mvzvzvwa";
+  const formspreeId = "mvzvzvwa";
   const formspreeUrl = `https://formspree.io/f/${formspreeId}`;
 
   return (
@@ -140,7 +161,7 @@ export default function App() {
                 Products
               </button>
               <button
-                onClick={() => scrollToSection("contact")}
+                onClick={() => scrollToSection("details")}
                 className="text-gray-600 hover:text-teal-600 transition"
               >
                 Contact
@@ -149,7 +170,7 @@ export default function App() {
                 onClick={() => scrollToSection("contact")}
                 className="bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition"
               >
-                Request Quote
+                Talk to Our Sales Team
               </button>
             </div>
             <button
@@ -203,21 +224,24 @@ export default function App() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Quality Pharmaceuticals for Better Health
+              Trusted Pharmaceutical Partner for Quality Healthcare Solutions
             </h1>
-            <p className="text-xl mb-8 text-cyan-100">2+ Years of Excellence</p>
+            <p className="text-xl mb-8 text-cyan-100">
+              {" "}
+              Quality • Trust • Timely Delivery{" "}
+            </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <button
                 onClick={() => scrollToSection("products")}
                 className="bg-teal-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-600 transition flex items-center justify-center"
               >
-                View Products <ArrowRight className="ml-2 h-5 w-5" />
+                Explore Our Products <ArrowRight className="ml-2 h-5 w-5" />
               </button>
               <button
                 onClick={() => scrollToSection("contact")}
                 className="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-slate-900 transition"
               >
-                Request Quote
+                Get a Quote
               </button>
             </div>
           </div>
@@ -232,40 +256,48 @@ export default function App() {
                 About PD Healthcare Pharmaceuticals
               </h2>
               <p className="text-gray-600 mb-6">
-                We are a leading pharmaceutical company dedicated to providing
-                high-quality, affordable medicines. With over 2 years of
-                experience, we serve healthcare providers across the INDIA.
+                PD Healthcare is committed to supplying high-quality
+                pharmaceutical products to hospitals, clinics, pharmacies, and
+                healthcare professionals across India. We focus on quality,
+                affordability, and timely delivery, ensuring every customer
+                receives trusted healthcare solutions.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex items-center space-x-3">
                   <Award className="h-6 w-6 text-teal-600" />
-                  <span className="text-gray-700"> Food License </span>
+                  <span className="text-gray-700">
+                    {" "}
+                    WHO-GMP Quality Standards{" "}
+                  </span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Shield className="h-6 w-6 text-teal-600" />
-                  <span className="text-gray-700">Trusted Quality </span>
+                  <span className="text-gray-700">FSSAI & Drug Licensed </span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Package className="h-6 w-6 text-teal-600" />
-                  <span className="text-gray-700">Growing Network</span>
+                  <span className="text-gray-700">
+                    Fast Nationwide Delivery
+                  </span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Users className="h-6 w-6 text-teal-600" />
-                  <span className="text-gray-700">800+ Clients</span>
+                  <span className="text-gray-700">500+ Happy Customers</span>
                 </div>
               </div>
             </div>
             <div className="bg-white p-8 rounded-xl shadow-lg">
               <h3 className="text-xl font-semibold mb-4">Our Mission</h3>
               <p className="text-gray-600 mb-4">
-                To improve health outcomes by providing safe, effective, and
-                affordable pharmaceutical products.
+                Our mission is to make quality medicines accessible by providing
+                safe, reliable, and affordable pharmaceutical products backed by
+                exceptional customer service.
               </p>
               <h3 className="text-xl font-semibold mb-4">Our Vision</h3>
               <p className="text-gray-600">
-                To be the most trusted pharmaceutical partner in healthcare,
-                delivering quality medicines that make a difference in people's
-                lives.
+                To become one of India's most trusted pharmaceutical companies
+                through innovation, quality assurance, and long-term customer
+                relationships.
               </p>
             </div>
           </div>
@@ -277,27 +309,27 @@ export default function App() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
               <div className="text-4xl font-bold text-teal-400">
-                {stats.products}+
+                {stats.Healthcare_Partners}+
               </div>
-              <div className="text-cyan-200 mt-2">Products</div>
+              <div className="text-cyan-200 mt-2">Healthcare Partners</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-teal-400">
-                {stats.categories}
+                {stats.Orders_Delivered}+
               </div>
-              <div className="text-cyan-200 mt-2">Categories</div>
+              <div className="text-cyan-200 mt-2">Orders Delivered</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-teal-400">
-                {stats.clients.toLocaleString()}+
+                {stats.Product_Categories.toLocaleString()}+
               </div>
-              <div className="text-cyan-200 mt-2">Happy Clients</div>
+              <div className="text-cyan-200 mt-2">Product Categories</div>
             </div>
             <div>
               <div className="text-4xl font-bold text-teal-400">
-                {stats.years}+
+                {stats.Customer_Satisfaction}%
               </div>
-              <div className="text-cyan-200 mt-2">Years</div>
+              <div className="text-cyan-200 mt-2">Customer Satisfaction</div>
             </div>
           </div>
         </div>
@@ -338,15 +370,22 @@ export default function App() {
                   <h3 className="text-lg font-semibold text-gray-900">
                     {product.name}
                   </h3>
+                  <h2 className="text-lg font-semibold text-gray-900">
+                    ₹{product.price}
+                  </h2>
                   <span className="text-sm bg-teal-100 text-teal-700 px-2 py-1 rounded">
                     {product.category}
                   </span>
                 </div>
-                <p className="text-gray-600 text-sm mb-4">
+                <p className="text-gray-600 whitespace-pre-line">
                   {product.description}
                 </p>
-                <button className="w-full bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition">
-                  Request Quote
+
+                <button
+                  onClick={() => scrollToSection("contact")}
+                  className="w-full bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition"
+                >
+                  Enquire Now
                 </button>
               </div>
             ))}
@@ -427,8 +466,12 @@ export default function App() {
       <section id="contact" className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
-            Request a Quote
+            Get A Quote / Enquire Now
           </h2>
+          <h4 className="text-3xl font-normal text-center text-gray-900 mb-8">
+            Tell us your requirements and our team will contact you within 24
+            hours.
+          </h4>
           <div className="max-w-2xl mx-auto">
             <form
               onSubmit={async (e) => {
@@ -529,129 +572,276 @@ export default function App() {
                 Submit Request
               </button>
             </form>
-
-            <div className="mt-8 grid md:grid-cols-3 gap-4 text-center">
-              <div className="flex items-center justify-center space-x-2">
-                <MapPin className="h-10 w-10 text-teal-600" />
-                <span className="text-gray-700">
-                  Mahavir Enclave 3,New Delhi,India - 110059
-                </span>
-              </div>
-              <div className="flex items-center justify-center space-x-2">
-                <Phone className="h-6 w-6 text-teal-600" />
-                <span className="text-gray-700">+91 7011351992</span>
-              </div>
-              <div className="flex items-center justify-center space-x-2">
-                <Mail className="h-10 w-10 text-teal-600" />
-                <span className="text-gray-700">pdhealthcare@gmail.com</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
-      
-      {/* Footer */}
-      <footer className="bg-slate-900 text-white py-8">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            {/* ✅ Company + Map */}
+
+      {/* Contact Details Section */}
+      <section
+        id="details"
+        className="py-20 bg-gradient-to-b from-white to-gray-50"
+      >
+        <div className="container mx-auto px-6">
+          {/* Heading */}
+          <div className="text-center mb-14">
+            <h2 className="text-4xl font-bold text-gray-900">Get in Touch</h2>
+            <p className="mt-3 text-gray-600 max-w-2xl mx-auto">
+              We're always happy to assist you with product enquiries, business
+              partnerships, and healthcare solutions.
+            </p>
+          </div>
+
+          {/* Cards */}
+          <div className="grid gap-8 md:grid-cols-3">
+            {/* Office */}
+            <a
+              href="https://maps.google.com/?q=Mahavir+Enclave+Phase+3,+New+Delhi,+110059"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-white rounded-3xl shadow-md p-8 text-center border border-gray-100
+        hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+            >
+              <div className="w-20 h-20 mx-auto rounded-full bg-teal-100 flex items-center justify-center group-hover:bg-teal-600 transition-colors duration-300">
+                <MapPin className="h-10 w-10 text-teal-600 group-hover:text-white transition-colors" />
+              </div>
+
+              <h3 className="mt-6 text-2xl font-bold text-gray-900">
+                Our Office
+              </h3>
+
+              <p className="mt-3 text-gray-600 leading-relaxed">
+                Mahavir Enclave Phase-3
+                <br />
+                New Delhi, India - 110059
+              </p>
+
+              <span className="inline-block mt-6 text-teal-600 font-semibold group-hover:translate-x-1 transition-transform">
+                View on Google Maps →
+              </span>
+            </a>
+
+            {/* Phone */}
+            <a
+              href="tel:+917011351992"
+              className="group bg-white rounded-3xl shadow-md p-8 text-center border border-gray-100
+        hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+            >
+              <div className="w-20 h-20 mx-auto rounded-full bg-teal-100 flex items-center justify-center group-hover:bg-teal-600 transition-colors duration-300">
+                <Phone className="h-10 w-10 text-teal-600 group-hover:text-white transition-colors" />
+              </div>
+
+              <h3 className="mt-6 text-2xl font-bold text-gray-900">Call Us</h3>
+
+              <p className="mt-3 text-gray-600 text-lg">+91 70113 51992</p>
+
+              <span className="inline-block mt-6 text-teal-600 font-semibold group-hover:translate-x-1 transition-transform">
+                Tap to Call →
+              </span>
+            </a>
+
+            {/* Email */}
+            <a
+              href="mailto:pdhealthcare@gmail.com"
+              className="group bg-white rounded-3xl shadow-md p-8 text-center border border-gray-100
+        hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
+            >
+              <div className="w-20 h-20 mx-auto rounded-full bg-teal-100 flex items-center justify-center group-hover:bg-teal-600 transition-colors duration-300">
+                <Mail className="h-10 w-10 text-teal-600 group-hover:text-white transition-colors" />
+              </div>
+
+              <h3 className="mt-6 text-2xl font-bold text-gray-900">
+                Email Us
+              </h3>
+
+              <p className="mt-3 text-gray-600 break-all">
+                pdhealthcare@gmail.com
+              </p>
+
+              <span className="inline-block mt-6 text-teal-600 font-semibold group-hover:translate-x-1 transition-transform">
+                Send an Email →
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= FOOTER ================= */}
+      <footer className="bg-slate-900 text-white">
+        {/* Top Accent */}
+        <div className="h-1 bg-gradient-to-r from-teal-500 via-green-500 to-teal-500"></div>
+
+        <div className="container mx-auto px-6 py-14">
+          <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-12">
+            {/* ================= COMPANY ================= */}
+
             <div>
-              <div className="flex items-center space-x-2 mb-4">
+              <div className="flex items-center space-x-3 mb-5">
                 <img
                   src="/logo.png"
                   alt="PD Healthcare"
-                  className="h-12 w-12"
+                  className="h-14 w-14"
                 />
-                <span className="text-xl font-bold">PD Healthcare</span>
+
+                <div>
+                  <h2 className="text-2xl font-bold">PD Healthcare</h2>
+
+                  <p className="text-sm text-slate-400">Pharmaceuticals</p>
+                </div>
               </div>
 
-              <p className="text-slate-400 text-sm mb-4">
-                Quality pharmaceuticals for better health outcomes.
+              <p className="text-slate-400 leading-7 mb-6">
+                Delivering trusted pharmaceutical formulations with a commitment
+                to quality, innovation, and patient well-being.
               </p>
 
-              {/* ✅ MAP BELOW TAGLINE */}
-              <div className="rounded-xl overflow-hidden border border-gray-700 shadow-md">
-                <iframe
-                  src="https://maps.google.com/maps?q=Sangam%20Vihar%20Delhi&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                  width="100%"
-                  height="140"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                ></iframe>
-              </div>
-
-              {/* Optional Open in Maps */}
-              {/* <a
-          href="https://maps.app.goo.gl/iLTmXoUNUTa7fiGu6"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block mt-2 text-sm text-[#6BC04A] hover:underline"
-        >
-          📍 Open in Google Maps
-        </a> */}
             </div>
 
-            {/* Quick Links */}
+            {/* ================= QUICK LINKS ================= */}
+
             <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <div className="space-y-2">
+              <h3 className="text-xl font-semibold mb-6">Quick Links</h3>
+
+              <div className="space-y-4">
                 <button
-                  onClick={() => scrollToSection("products")}
-                  className="block text-slate-400 hover:text-[#177A3A] text-sm"
+                  onClick={() => scrollToSection("home")}
+                  className="flex items-center gap-2 text-slate-400 hover:text-teal-400 transition"
                 >
-                  Products
+                  <ChevronRight size={18} />
+                  Home
                 </button>
+
                 <button
                   onClick={() => scrollToSection("about")}
-                  className="block text-slate-400 hover:text-[#177A3A] text-sm"
+                  className="flex items-center gap-2 text-slate-400 hover:text-teal-400 transition"
                 >
+                  <ChevronRight size={18} />
                   About Us
                 </button>
+
+                <button
+                  onClick={() => scrollToSection("products")}
+                  className="flex items-center gap-2 text-slate-400 hover:text-teal-400 transition"
+                >
+                  <ChevronRight size={18} />
+                  Products
+                </button>
+
                 <button
                   onClick={() => scrollToSection("contact")}
-                  className="block text-slate-400 hover:text-[#177A3A] text-sm"
+                  className="flex items-center gap-2 text-slate-400 hover:text-teal-400 transition"
                 >
+                  <ChevronRight size={18} />
                   Contact
                 </button>
               </div>
             </div>
 
-            {/* Products */}
+            {/* ================= CONTACT ================= */}
+
             <div>
-              <h4 className="font-semibold mb-4">Products</h4>
-              <div className="space-y-2">
-                <p className="text-slate-400 text-sm">Tablets</p>
-                <p className="text-slate-400 text-sm">Capsules</p>
-                <p className="text-slate-400 text-sm">Syrups</p>
-                <p className="text-slate-400 text-sm">Injectables</p>
+              <h3 className="text-xl font-semibold mb-6">Contact</h3>
+
+              <div className="space-y-5">
+             
+
+                <a
+                  href="tel:+917011351992"
+                  className="flex items-center gap-3 text-slate-400 hover:text-teal-400 transition"
+                >
+                  <Phone className="h-5 w-5" />
+                  +91 70113 51992
+                </a>
+
+                <a
+                  href="mailto:pdhealthcare@gmail.com"
+                  className="flex items-center gap-3 text-slate-400 hover:text-teal-400 transition"
+                >
+                  <Mail className="h-5 w-5" />
+                  pdhealthcare@gmail.com
+                </a>
               </div>
             </div>
 
-            {/* Business Hours */}
+            {/* ================= BUSINESS HOURS ================= */}
+
             <div>
-              <h4 className="font-semibold mb-4">Business Hours</h4>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2 text-slate-400 text-sm">
-                  <Clock className="h-4 w-4" />
-                  <span>Mon-Sat: 9AM-6PM</span>
+              <h3 className="text-xl font-semibold mb-6">Business Hours</h3>
+
+              <div className="space-y-5">
+                <div className="flex gap-3">
+                  <Clock className="h-5 w-5 text-teal-400 mt-1" />
+
+                  <div>
+                    <p className="font-medium">Monday - Saturday</p>
+
+                    <p className="text-slate-400">9:00 AM - 6:00 PM</p>
+                  </div>
                 </div>
-                <div className="flex items-center space-x-2 text-slate-400 text-sm">
-                  <Clock className="h-4 w-4" />
-                  <span>Sun: Closed</span>
+
+                <div className="flex gap-3">
+                  <Clock className="h-5 w-5 text-teal-400 mt-1" />
+
+                  <div>
+                    <p className="font-medium">Sunday</p>
+
+                    <p className="text-slate-400">Closed</p>
+                  </div>
+                </div>
+
+                {/* Social Icons */}
+
+                <div className="pt-6">
+                  <h4 className="font-semibold mb-4">Follow Us</h4>
+
+                  <div className="flex gap-4">
+                    {/* <a
+                      href="#"
+                      className="p-3 rounded-full bg-slate-800 hover:bg-teal-600 transition"
+                    >
+                      <Facebook size={18} />
+                    </a> */}
+
+                    {/* <a
+                      href="#"
+                      className="p-3 rounded-full bg-slate-800 hover:bg-teal-600 transition"
+                    >
+                      <Instagram size={18} />
+                    </a> */}
+
+                    {/* <a
+                      href="#"
+                      className="p-3 rounded-full bg-slate-800 hover:bg-teal-600 transition"
+                    >
+                      <Linkedin size={18} />
+                    </a> */}
+
+                    {/* <a
+                      href="mailto:pdhealthcare@gmail.com"
+                      className="p-3 rounded-full bg-slate-800 hover:bg-teal-600 transition"
+                    >
+                      <Mail size={18} />
+                    </a> */}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Bottom Line */}
-          <div className="border-t border-slate-800 mt-8 pt-8 text-center">
-            <p className="text-slate-400 text-sm">
-              © 2024 PD Healthcare Pharmaceuticals. All rights reserved.
+          {/* Bottom */}
+
+          <div className="border-t border-slate-700 mt-14 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-slate-400 text-sm text-center md:text-left">
+              © 2026{" "}
+              <span className="font-semibold text-white">PD Healthcare</span>.
+              All Rights Reserved.
+            </p>
+
+            <p className="text-slate-500 text-sm text-center">
+              Designed & Developed with ❤️ for Better Healthcare
             </p>
           </div>
         </div>
       </footer>
-      S
     </div>
   );
 }
